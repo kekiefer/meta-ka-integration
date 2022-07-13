@@ -21,8 +21,7 @@ CORE_IMAGE_BASE_INSTALL += " \
     packagegroup-demo-egltests \
     packagegroup-demo-systemd \
     packagegroup-demo-westontests \
-    tensorrt-tests \
-    python3-tensorrt \
+    packagegroup-ka-deps \
 "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-cuda-sdk-host"
@@ -36,4 +35,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     v4l-utils \
     v4l2loopback \
     l4t-usb-device-mode \
+    tensorrt-tests \
 "
