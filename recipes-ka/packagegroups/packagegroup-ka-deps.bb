@@ -20,6 +20,7 @@ RRECOMMENDS:${PN} = "\
 # Packages for K-A integration runtime
 RDEPENDS:${PN}-runtime = "\
     python3-aiohttp \
+    python3-async-timeout \
 "
 
 # various things used for development/debugging, not production
