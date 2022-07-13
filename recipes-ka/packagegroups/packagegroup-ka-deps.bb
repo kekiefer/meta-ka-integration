@@ -22,6 +22,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-aiohttp \
     python3-async-timeout \
     python3-attrs \
+    python3-boto3 \
 "
 
 # various things used for development/debugging, not production
