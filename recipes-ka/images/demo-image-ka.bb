@@ -19,6 +19,7 @@ CORE_IMAGE_BASE_INSTALL += " \
     packagegroup-demo-systemd \
     packagegroup-demo-westontests \
     tensorrt-tests \
+    python3-tensorrt \
 "
 
 TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-cuda-sdk-host"
