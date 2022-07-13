@@ -21,6 +21,7 @@ RRECOMMENDS:${PN} = "\
 RDEPENDS:${PN}-runtime = "\
     python3-aiohttp \
     python3-async-timeout \
+    python3-attrs \
 "
 
 # various things used for development/debugging, not production
