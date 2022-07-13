@@ -11,4 +11,4 @@ S = "${WORKDIR}/cloudpickle-${PV}"
 
 inherit setuptools3
 
-RDEPENDS:${PN} += "python3-asyncio python3-core python3-distutils python3-io python3-logging python3-math python3-multiprocessing python3-netclient python3-numpy python3-pickle python3-py python3-pytest python3-typing-extensions python3-unittest python3-xml"
+RDEPENDS:${PN} += "python3-asyncio python3-core python3-distutils python3-io python3-logging python3-math python3-multiprocessing python3-netclient python3-numpy python3-pickle python3-py python3-typing-extensions python3-xml"

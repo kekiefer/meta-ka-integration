@@ -23,6 +23,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-async-timeout \
     python3-attrs \
     python3-boto3 \
+    python3-cloudpickle \
 "
 
 # various things used for development/debugging, not production
