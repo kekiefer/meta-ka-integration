@@ -7,7 +7,10 @@ inherit features_check
 
 REQUIRED_DISTRO_FEATURES = "wayland opengl systemd"
 
+PACKAGE_CLASSES ?= "package_rpm"
+
 IMAGE_FEATURES += "ssh-server-openssh hwcodecs weston"
+EXTRA_IMAGE_FEATURES += "package-management debug-tweaks empty-root-password allow-empty-password ssh-server-openssh"
 
 CORE_IMAGE_BASE_INSTALL += " \
     connman \
@@ -32,4 +35,5 @@ SYSTEMD_DEFAULT_TARGET = "graphical.target"
 CORE_IMAGE_EXTRA_INSTALL += " \
     v4l-utils \
     v4l2loopback \
+    l4t-usb-device-mode \
 "
