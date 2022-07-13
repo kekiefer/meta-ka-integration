@@ -24,6 +24,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-attrs \
     python3-boto3 \
     python3-cloudpickle \
+    python3-dataclass-wizard \
 "
 
 # various things used for development/debugging, not production
