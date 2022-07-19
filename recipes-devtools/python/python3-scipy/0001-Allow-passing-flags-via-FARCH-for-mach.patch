@@ -1,0 +1,38 @@
+From 1fdb77a45b9554ef8103560e5d8de6476009abbb Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Tue, 19 Jul 2022 22:59:04 -0700
+Subject: [PATCH] Allow passing flags via FARCH for mach
+
+---
+ scipy/integrate/setup.py | 3 +--
+ scipy/special/setup.py   | 3 +--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/scipy/integrate/setup.py b/scipy/integrate/setup.py
+index 1ba82d18..81b09610 100644
+--- a/scipy/integrate/setup.py
++++ b/scipy/integrate/setup.py
+@@ -34,8 +34,7 @@ def configuration(parent_package='',top_path=None):
+     quadpack_test_src = [join('tests','_test_multivariate.c')]
+     odeint_banded_test_src = [join('tests', 'banded5x5.f')]
+ 
+-    config.add_library('mach', sources=mach_src, config_fc={'noopt': (__file__, 1)},
+-                       _pre_build_hook=pre_build_hook)
++    config.add_library('mach', sources=mach_src, _pre_build_hook=pre_build_hook)
+     config.add_library('quadpack', sources=quadpack_src, _pre_build_hook=pre_build_hook)
+     config.add_library('lsoda', sources=lsoda_src, _pre_build_hook=pre_build_hook)
+     config.add_library('vode', sources=vode_src, _pre_build_hook=pre_build_hook)
+diff --git a/scipy/special/setup.py b/scipy/special/setup.py
+index 99be7515..e3d5f76d 100644
+--- a/scipy/special/setup.py
++++ b/scipy/special/setup.py
+@@ -50,8 +50,7 @@ def configuration(parent_package='',top_path=None):
+     amos_src = [join('amos','*.f')]
+     cdf_src = [join('cdflib','*.f')]
+     specfun_src = [join('specfun','*.f')]
+-    config.add_library('sc_mach',sources=mach_src,
+-                       config_fc={'noopt':(__file__,1)})
++    config.add_library('sc_mach',sources=mach_src)
+     config.add_library('sc_amos',sources=amos_src)
+     config.add_library('sc_cdf',sources=cdf_src)
+     config.add_library('sc_specfun',sources=specfun_src)
