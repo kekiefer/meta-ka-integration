@@ -27,6 +27,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-dataclass-wizard \
     python3-filterpy \
     python3-scipy \
+    python3-torch \
 "
 
 # various things used for development/debugging, not production
