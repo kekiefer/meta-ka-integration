@@ -26,8 +26,8 @@ export LDSHARED := "${@d.getVar('LDSHARED', True).split()[0]}"
 
 # Tell Numpy to look in target sysroot site-packages directory for libraries
 LDFLAGS:append = " \
-    -L${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/lib \
-    -L${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/random/lib \
+    -L${STAGING_DIR_TARGET}${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib \
+    -L${STAGING_DIR_TARGET}${PYTHON_SITEPACKAGES_DIR}/numpy/random/lib \
 "
 
 # WARNING: We were unable to map the following python package/module
