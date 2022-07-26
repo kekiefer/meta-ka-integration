@@ -1,0 +1,45 @@
+From c8acbd6657c80c1f0a5c126866c55dc8c44a088e Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Sun, 24 Jul 2022 23:02:47 -0700
+Subject: [PATCH] Fixes for yocto build workflow
+
+---
+ setup.py                     | 4 ++--
+ tools/setup_helpers/cmake.py | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 44bf5a74..ec8af7ca 100644
+--- a/setup.py
++++ b/setup.py
+@@ -228,7 +228,7 @@ import sysconfig
+ from tools.build_pytorch_libs import build_caffe2
+ from tools.setup_helpers.env import (IS_WINDOWS, IS_DARWIN, IS_LINUX,
+                                      build_type)
+-from tools.setup_helpers.cmake import CMake
++from tools.setup_helpers.cmake import CMake, BUILD_DIR as DEFAULT_BUILD_DIR
+ from tools.generate_torch_version import get_torch_version
+ 
+ ################################################################################
+@@ -306,7 +306,7 @@ package_name = os.getenv('TORCH_PACKAGE_NAME', 'torch')
+ version = get_torch_version()
+ report("Building wheel {}-{}".format(package_name, version))
+ 
+-cmake = CMake()
++cmake = CMake(os.getenv("BUILD_DIR", DEFAULT_BUILD_DIR))
+ 
+ 
+ def get_submodule_folders():
+diff --git a/tools/setup_helpers/cmake.py b/tools/setup_helpers/cmake.py
+index 51976e76..fa81df30 100644
+--- a/tools/setup_helpers/cmake.py
++++ b/tools/setup_helpers/cmake.py
+@@ -355,7 +355,7 @@ class CMake:
+ 
+         from .env import build_type
+ 
+-        build_args = ['--build', '.', '--target', 'install', '--config', build_type.build_type_string]
++        build_args = ['--build', '.', '--config', build_type.build_type_string]
+ 
+         # Determine the parallelism according to the following
+         # priorities:

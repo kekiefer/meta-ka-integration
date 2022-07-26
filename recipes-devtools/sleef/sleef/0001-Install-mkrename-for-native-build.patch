@@ -1,0 +1,22 @@
+From 65db27a8a4be709b730bfe2c94e528ccb1e26d61 Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Sat, 23 Jul 2022 23:02:19 -0700
+Subject: [PATCH] Install mkrename for native build
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 52dfae1..be15718 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -137,6 +137,8 @@ set(TARGET_LIBARRAYMAP_OBJ "arraymap")
+ function(add_host_executable TARGETNAME)
+   if (NOT CMAKE_CROSSCOMPILING)
+     add_executable(${TARGETNAME} ${ARGN})
++    install(TARGETS ${TARGETNAME}
++          DESTINATION "${CMAKE_INSTALL_BINDIR}")
+   else()
+     add_executable(${TARGETNAME} IMPORTED)
+     set_property(TARGET ${TARGETNAME} PROPERTY IMPORTED_LOCATION ${NATIVE_BUILD_DIR}/bin/${TARGETNAME})

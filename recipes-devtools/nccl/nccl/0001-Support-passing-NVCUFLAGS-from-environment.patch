@@ -1,0 +1,38 @@
+From 2cd1b89d328fb6ef54b1df4dc6f29f7dae60f84a Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Thu, 21 Jul 2022 15:42:08 -0700
+Subject: [PATCH] Support passing NVCUFLAGS from environment
+
+---
+ makefiles/common.mk | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/makefiles/common.mk b/makefiles/common.mk
+index 1a1c2b6..5b6c6c0 100644
+--- a/makefiles/common.mk
++++ b/makefiles/common.mk
+@@ -54,7 +54,8 @@ CXXFLAGS   := -DCUDA_MAJOR=$(CUDA_MAJOR) -DCUDA_MINOR=$(CUDA_MINOR) -fPIC -fvisi
+ # Maxrregcount needs to be set accordingly to NCCL_MAX_NTHREADS (otherwise it will cause kernel launch errors)
+ # 512 : 120, 640 : 96, 768 : 80, 1024 : 60
+ # We would not have to set this if we used __launch_bounds__, but this only works on kernels, not on functions.
+-NVCUFLAGS  := -ccbin $(CXX) $(NVCC_GENCODE) -std=c++11 --expt-extended-lambda -Xptxas -maxrregcount=96 -Xfatbin -compress-all
++NVCUFLAGS  ?= -ccbin $(CXX) $(NVCC_GENCODE) -Xptxas -maxrregcount=96 -Xfatbin -compress-all
++NVCUFLAGS  += -std=c++11 --expt-extended-lambda
+ # Use addprefix so that we can specify more than one path
+ NVLDFLAGS  := -L${CUDA_LIB} -lcudart -lrt
+ 
+@@ -68,14 +69,6 @@ NVLDFLAGS   += ${GCOV_FLAGS:%=-Xcompiler %}
+ # $(warning GCOV_FLAGS=${GCOV_FLAGS})
+ ########## GCOV ##########
+ 
+-ifeq ($(DEBUG), 0)
+-NVCUFLAGS += -O3
+-CXXFLAGS  += -O3 -g
+-else
+-NVCUFLAGS += -O0 -G -g
+-CXXFLAGS  += -O0 -g -ggdb3
+-endif
+-
+ ifneq ($(VERBOSE), 0)
+ NVCUFLAGS += -Xptxas -v -Xcompiler -Wall,-Wextra,-Wno-unused-parameter
+ CXXFLAGS  += -Wall -Wextra

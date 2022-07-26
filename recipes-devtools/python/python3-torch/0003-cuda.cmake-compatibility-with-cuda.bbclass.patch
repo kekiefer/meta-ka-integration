@@ -1,0 +1,33 @@
+From 5e19b2b4c0ca3c79da6eb65d3b73ccb4e8abc17b Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Fri, 22 Jul 2022 16:48:52 -0700
+Subject: [PATCH] cuda.cmake: compatibility with cuda.bbclass
+
+---
+ cmake/public/cuda.cmake | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/cmake/public/cuda.cmake b/cmake/public/cuda.cmake
+index 7ba2bb6d..9249b01a 100644
+--- a/cmake/public/cuda.cmake
++++ b/cmake/public/cuda.cmake
+@@ -433,11 +433,6 @@ if(MSVC AND CMAKE_GENERATOR STREQUAL "Ninja" AND NOT DEFINED ENV{CUDAHOSTCXX})
+   list(APPEND CUDA_NVCC_FLAGS "--use-local-env")
+ endif()
+ 
+-# setting nvcc arch flags
+-torch_cuda_get_nvcc_gencode_flag(NVCC_FLAGS_EXTRA)
+-list(APPEND CUDA_NVCC_FLAGS ${NVCC_FLAGS_EXTRA})
+-message(STATUS "Added CUDA NVCC flags for: ${NVCC_FLAGS_EXTRA}")
+-
+ # disable some nvcc diagnostic that appears in boost, glog, glags, opencv, etc.
+ foreach(diag cc_clobber_ignored integer_sign_change useless_using_declaration
+              set_but_not_used field_without_dll_interface
+@@ -493,3 +488,7 @@ list(APPEND CUDA_NVCC_FLAGS "--expt-relaxed-constexpr")
+ 
+ # Set expt-extended-lambda to support lambda on device
+ list(APPEND CUDA_NVCC_FLAGS "--expt-extended-lambda")
++
++foreach(FLAG ${CUDA_NVCC_FLAGS})
++  string(APPEND CMAKE_CUDA_FLAGS " ${FLAG}")
++endforeach()
