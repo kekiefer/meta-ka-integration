@@ -25,7 +25,11 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig cuda
 
-DEPENDS += "openssl nccl hiredis"
+DEPENDS += "openssl nccl"
+
+PACKAGECONFIG ?= ""
+PACKAGECONFIG:class-target ?= "hiredis"
+PACKAGECONFIG[hiredis] = ",,,hiredis"
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE += " \
@@ -34,3 +38,4 @@ EXTRA_OECMAKE += " \
     -DCUDA_VERBOSE_BUILD=1 \
 "
 
+BBCLASSEXTEND = "native nativesdk"

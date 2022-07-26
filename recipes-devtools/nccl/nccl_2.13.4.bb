@@ -27,3 +27,5 @@ do_install () {
 	oe_runmake src.install
 }
 
+
+BBCLASSEXTEND = "native nativesdk"
