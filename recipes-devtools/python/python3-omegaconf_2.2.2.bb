@@ -9,6 +9,6 @@ S = "${WORKDIR}/omegaconf-${PV}"
 
 inherit setuptools3 pypi java
 
-DEPENDS += "virtual/java-native python3-antlr4-runtime"
+DEPENDS += "virtual/java-native"
 
-RDEPENDS:${PN} += "python3-core python3-attrs python3-pyyaml"
+RDEPENDS:${PN} += "python3-core python3-attrs python3-pyyaml python3-antlr4-runtime"
