@@ -29,6 +29,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-genson \
     python3-greenlet \
     python3-hydra \
+    python3-idna \
     python3-scipy \
     python3-torch \
     python3-torchvision \
