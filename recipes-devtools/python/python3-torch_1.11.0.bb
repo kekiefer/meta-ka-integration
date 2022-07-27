@@ -124,7 +124,7 @@ export BUILD_DIR = "${B}"
 CUDA_NVCC_EXTRA_FLAGS = "${@cuda_extract_compiler('CXX_FOR_CUDA', d)[1]} -Xcompiler -isystem=${includedir}/c++/8.5.0"
 
 # setuptools3_do_compile misses this for some reason
-# LDFLAGS += "-L${B}/lib"
+LDFLAGS += "-L${B}/lib"
 
 do_configure() {
     export CUFLAGS="${CUFLAGS}"
