@@ -28,6 +28,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-filterpy \
     python3-scipy \
     python3-torch \
+    python3-torchvision \
 "
 
 # various things used for development/debugging, not production
