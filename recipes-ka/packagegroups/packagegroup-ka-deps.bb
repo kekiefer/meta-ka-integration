@@ -32,6 +32,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-idna \
     python3-injector \
     python3-iopath \
+    python3-jsonschema \
     python3-scipy \
     python3-torch \
     python3-torchvision \
