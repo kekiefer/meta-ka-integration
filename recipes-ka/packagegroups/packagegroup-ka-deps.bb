@@ -26,6 +26,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-cloudpickle \
     python3-dataclass-wizard \
     python3-filterpy \
+    python3-genson \
     python3-scipy \
     python3-torch \
     python3-torchvision \
