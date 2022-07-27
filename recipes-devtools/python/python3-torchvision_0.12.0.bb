@@ -14,10 +14,10 @@ inherit setuptools3
 
 PACKAGECONFIG ?= "scipy png jpg"
 
-PACKAGECONFIG[jpg] = ",,,jpeg"
-PACKAGECONFIG[png] = ",,,libpng"
+PACKAGECONFIG[jpg] = ",,jpeg"
+PACKAGECONFIG[png] = ",,libpng"
 PACKAGECONFIG[scipy] = ",,,python3-scipy"
-PACKAGECONFIG[ffmpeg] = ",,,ffmpeg"
+PACKAGECONFIG[ffmpeg] = ",,ffmpeg"
 
 DEPENDS += " \
     protobuf-native \

@@ -7,13 +7,11 @@ SRC_URI = "https://github.com/pytorch/pytorch/releases/download/v${PV}/pytorch-v
            file://0001-Support-cross-build-environment-variables.patch \
            file://0002-caffe2-fix-cross-compiling.patch \
            file://0003-cuda.cmake-compatibility-with-cuda.bbclass.patch \
-           file://0004-Fix-discovery-of-libnvToolsExt.so.patch \
            file://0001-Fixes-for-yocto-build-workflow.patch \
-           file://0002-Fix-for-newer-GCC-null-pointer-check.patch \
            file://0003-Remove-rpath-setting.patch \
            "
 
-SRC_URI[sha256sum] = "ae0e462d5e4eab79c5b52d4318c03522ebe94adfefee10a5c80b92c04aaae60b"
+SRC_URI[sha256sum] = "dc0c2b8d13c112a2b9ea8757a475b0ce2ca97cd19c50a8b70b8c286676616f1d"
 
 S = "${WORKDIR}/pytorch-v${PV}"
 B = "${S}/build"
@@ -24,9 +22,9 @@ inherit cmake setuptools3 cuda
 
 PACKAGECONFIG ??= "fftw hiredis opencv"
 
-PACKAGECONFIG[opencv] = ",,,opencv"
-PACKAGECONFIG[fftw] = ",,,fftw"
-PACKAGECONFIG[hiredis] = ",,,hiredis"
+PACKAGECONFIG[opencv] = ",,opencv"
+PACKAGECONFIG[fftw] = ",,fftw"
+PACKAGECONFIG[hiredis] = ",,hiredis"
 
 DEPENDS += " \
     coreutils-native \
@@ -65,6 +63,7 @@ EXTRA_OECMAKE += " \
     -DUSE_BREAKPAD=OFF \
     -DTORCH_INSTALL_LIB_DIR=${PYTHON_SITEPACKAGES_DIR}/torch/lib \
     -DPYTHON_INCLUDE_DIR=${PYTHON_INCLUDE_DIR} \
+    -DCMAKE_CUDA_COMPILER_FORCED=1 \
 "
 
 RDEPENDS:${PN} += " \
@@ -120,10 +119,15 @@ RDEPENDS:${PN}:append:cuda = " \
 export NUMPY_INCLUDE_DIR = "${STAGING_DIR_TARGET}${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
 export BUILD_DIR = "${B}"
 
+# cuda_extract_compiler() gets CXX sysroot arguments into the nvcc command, and
+# -isystem is needed for g++ (when run under nvcc) to locate standard includes (e.g. <math.h>)
+CUDA_NVCC_EXTRA_FLAGS = "${@cuda_extract_compiler('CXX_FOR_CUDA', d)[1]} -Xcompiler -isystem=${includedir}/c++/8.5.0"
+
 # setuptools3_do_compile misses this for some reason
-LDFLAGS += "-L${B}/lib"
+# LDFLAGS += "-L${B}/lib"
 
 do_configure() {
+    export CUFLAGS="${CUFLAGS}"
     cmake_do_configure
 }
 
