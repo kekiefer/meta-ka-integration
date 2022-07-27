@@ -35,6 +35,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-jsonschema \
     python3-msgpack \
     python3-nanoid \
+    python3-numpy \
     python3-scipy \
     python3-torch \
     python3-torchvision \
