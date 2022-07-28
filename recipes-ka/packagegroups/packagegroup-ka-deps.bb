@@ -47,6 +47,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-pyyaml \
     python3-pyzmq \
     python3-requests \
+    python3-rich \
     python3-scipy \
     python3-torch \
     python3-torchvision \
