@@ -50,6 +50,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-rich \
     python3-scipy \
     python3-tabulate \
+    python3-tqdm \
     python3-torch \
     python3-torchvision \
 "
