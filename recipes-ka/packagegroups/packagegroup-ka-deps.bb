@@ -53,6 +53,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-tqdm \
     python3-typing-extensions \
     python3-webcolors \
+    python3-yarl \
     python3-torch \
     python3-torchvision \
 "
