@@ -43,6 +43,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-dotenv \
     python3-engineio \
     python3-socketio \
+    python3-pyturbojpeg \
     python3-scipy \
     python3-torch \
     python3-torchvision \
