@@ -9,4 +9,4 @@ S = "${WORKDIR}/injector-${PV}"
 
 inherit setuptools3 pypi
 
-RDEPENDS:${PN} += "python3-core python3-logging python3-typing-extensions python3-mypy"
+RDEPENDS:${PN} += "python3-core python3-logging python3-typing-extensions"
