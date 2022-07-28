@@ -46,6 +46,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-pyturbojpeg \
     python3-pyyaml \
     python3-pyzmq \
+    python3-requests \
     python3-scipy \
     python3-torch \
     python3-torchvision \
