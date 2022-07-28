@@ -10,4 +10,4 @@ S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
 
 inherit setuptools3 pypi
 
-RDEPENDS:${PN} += "python3-core python3-ctypes python3-doctest python3-json python3-logging python3-math python3-matplotlib python3-numpy python3-pickle python3-pyparsing python3-pytest python3-shell python3-stringoldpython3-xml"
+RDEPENDS:${PN} += "python3-core python3-ctypes python3-json python3-logging python3-math python3-numpy python3-pickle python3-pyparsing python3-pytest python3-shell python3-stringold python3-xml"
