@@ -38,6 +38,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-numpy \
     python3-omegaconf \
     python3-opencv \
+    python3-pandas \
     python3-scipy \
     python3-torch \
     python3-torchvision \
