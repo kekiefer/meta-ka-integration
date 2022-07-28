@@ -11,9 +11,9 @@ inherit setuptools3 pypi
 
 CLEANBROKEN = "1"
 
-DEPENDS += "python3-setuptools-native python3-cython-native python3-pybind11-native python3-cython python3-pythran-native lapack libgfortran python3-numpy"
+DEPENDS += "python3-setuptools-native python3-cython-native python3-pybind11-native python3-pythran-native lapack libgfortran python3-numpy"
 
-RDEPENDS:${PN} += "lapack python3-asyncio python3-cffi python3-cython python3-compression python3-core python3-ctypes python3-datetime python3-distutils python3-io python3-json python3-logging python3-math python3-misc python3-mmap python3-multiprocessing python3-numbers python3-numpy python3-pickle python3-profile python3-psutil python3-resource python3-shell python3-stringold python3-typing-extensions"
+RDEPENDS:${PN} += "python3-asyncio python3-cffi python3-cython python3-compression python3-core python3-ctypes python3-datetime python3-distutils python3-io python3-json python3-logging python3-math python3-misc python3-mmap python3-multiprocessing python3-numbers python3-numpy python3-pickle python3-profile python3-psutil python3-resource python3-shell python3-stringold python3-typing-extensions"
 
 export LAPACK = "${STAGING_LIBDIR}"
 export BLAS = "${STAGING_LIBDIR}"
@@ -29,26 +29,3 @@ LDFLAGS:append = " \
     -L${STAGING_DIR_TARGET}${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib \
     -L${STAGING_DIR_TARGET}${PYTHON_SITEPACKAGES_DIR}/numpy/random/lib \
 "
-
-# WARNING: We were unable to map the following python package/module
-# dependencies to the bitbake packages which include them:
-#    IPython
-#    StringIO
-#    benchmarks.common
-#    cPickle
-#    matplotlib
-#    matplotlib.collections
-#    matplotlib.patches
-#    matplotlib.pylab
-#    matplotlib.pyplot
-#    mpmath
-#    mypy.api
-#    scikits.umfpack
-#    sksparse
-#    sksparse.cholmod
-#    sparse
-#    sphinx.ext.autodoc
-#    sympy
-#    sympy.abc
-#    sympy.polys.polyfuncs
-#    threadpoolctl
