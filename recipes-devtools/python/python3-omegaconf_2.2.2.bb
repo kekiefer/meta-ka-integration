@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "65c85b2a84669a570c70f2df00de3cebcd9b47a8587d3c53b1aa5766bb
 
 S = "${WORKDIR}/omegaconf-${PV}"
 
-inherit setuptools3 pypi java
+inherit setuptools3 pypi
 
 DEPENDS += "virtual/java-native"
 
