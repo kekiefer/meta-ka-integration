@@ -49,6 +49,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-requests \
     python3-rich \
     python3-scipy \
+    python3-seaborn \
     python3-tabulate \
     python3-tqdm \
     python3-typing-extensions \
