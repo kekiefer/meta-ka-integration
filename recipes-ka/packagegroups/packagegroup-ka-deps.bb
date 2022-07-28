@@ -40,6 +40,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-opencv \
     python3-pandas \
     python3-pillow \
+    python3-dotenv \
     python3-scipy \
     python3-torch \
     python3-torchvision \
