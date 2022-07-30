@@ -9,6 +9,8 @@ SRCREV = "19ab67d1727d337d10d0a48cbaf5cd119b8d88f1"
 
 S = "${WORKDIR}/git"
 
+COMPATIBLE_MACHINE = "(cuda)"
+
 inherit cuda
 
 DEPENDS += "coreutils-native"
@@ -23,9 +25,6 @@ do_compile () {
 }
 
 do_install () {
-        export PREFIX="${D}${prefix}"
+	export PREFIX="${D}${prefix}"
 	oe_runmake src.install
 }
-
-
-BBCLASSEXTEND = "native nativesdk"

@@ -1,0 +1,25 @@
+From baea217079c6094461ac65e45b2de2a1a2626f1f Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Thu, 28 Jul 2022 10:18:31 -0700
+Subject: [PATCH] Fix magma.pc generation
+
+---
+ lib/pkgconfig/magma.pc.in | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/lib/pkgconfig/magma.pc.in b/lib/pkgconfig/magma.pc.in
+index 12a4e39..7c7d63d 100644
+--- a/lib/pkgconfig/magma.pc.in
++++ b/lib/pkgconfig/magma.pc.in
+@@ -6,8 +6,8 @@ includedir=${prefix}/include
+ Name: magma
+ Description: Matrix Algebra on GPU and Multicore Architectures
+ Version: 2.6.2
+-Cflags: -I${includedir} @CXXFLAGS@ @MAGMA_INCLUDE@
+-Libs: -L${libdir} -lmagma_sparse -lmagma @LIBS@
++Cflags: -I${includedir}
++Libs: -L${libdir} -lmagma_sparse -lmagma
+ Libs.private:
+-Requires: @MAGMA_REQUIRED@
++Requires:
+ Requires.private:

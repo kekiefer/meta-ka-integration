@@ -23,19 +23,19 @@ SRCREV = "950c0e23819779a9e0c70b861db4c52b31d1d1b2"
 
 S = "${WORKDIR}/git"
 
+COMPATIBLE_MACHINE = "(cuda)"
+
 inherit cmake pkgconfig cuda
 
 DEPENDS += "openssl nccl"
 
-PACKAGECONFIG ?= ""
-PACKAGECONFIG:class-target ?= "hiredis"
+PACKAGECONFIG ?= "hiredis"
+
 PACKAGECONFIG[hiredis] = ",,,hiredis"
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-EXTRA_OECMAKE += " \
+EXTRA_OECMAKE:append = " \
     -DUSE_CUDA=1 \
     -DCUDA_SDK_ROOT_DIR=${CUDA_TOOLKIT_ROOT} \
     -DCUDA_VERBOSE_BUILD=1 \
 "
-
-BBCLASSEXTEND = "native nativesdk"
