@@ -9,4 +9,4 @@ S = "${WORKDIR}/iopath-${PV}"
 
 inherit setuptools3 pypi
 
-RDEPENDS:${PN} += "python3-core"
+RDEPENDS:${PN} += "python3-core python3-portalocker"
