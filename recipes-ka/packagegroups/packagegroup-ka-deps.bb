@@ -9,6 +9,7 @@ inherit packagegroup
 
 PACKAGES += "\
     ${PN}-core \
+    ${PN}-detectors \
     ${PN}-runtime \
     ${PN}-development \
 "
@@ -27,9 +28,17 @@ RDEPENDS:${PN}-core = "\
     python3-pygobject \
 "
 
+RDEPENDS:${PN}-detectors = "\
+    python3-dvclive \
+    python3-mmcls \
+    python3-mmcv \
+    python3-openmim \
+"
+
 # Packages for K-A integration runtime
 RDEPENDS:${PN}-runtime = "\
     ${PN}-core \
+    ${PN}-detectors \
     python3-aiohttp \
     python3-async-timeout \
     python3-attrs \
