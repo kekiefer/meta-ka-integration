@@ -8,17 +8,28 @@ PR = "r1"
 inherit packagegroup
 
 PACKAGES += "\
+    ${PN}-core \
     ${PN}-runtime \
     ${PN}-development \
 "
 
 RRECOMMENDS:${PN} = "\
+    ${PN}-core \
     ${PN}-runtime \
     ${PN}-development \
 "
 
+RDEPENDS:${PN}-core = "\
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-tegra \
+    python3-pygobject \
+"
+
 # Packages for K-A integration runtime
 RDEPENDS:${PN}-runtime = "\
+    ${PN}-core \
     python3-aiohttp \
     python3-async-timeout \
     python3-attrs \
