@@ -39,7 +39,6 @@ RDEPENDS:${PN}-runtime = "\
     python3-filterpy \
     python3-genson \
     python3-greenlet \
-    python3-hydra \
     python3-idna \
     python3-injector \
     python3-iopath \
