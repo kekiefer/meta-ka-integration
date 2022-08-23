@@ -1,18 +1,18 @@
-From 6e24e2b2d6202ee9cc3c271233dcedebb8b104ad Mon Sep 17 00:00:00 2001
+From af0388170b5248e05c864f7c1f47ff2d6a875d87 Mon Sep 17 00:00:00 2001
 From: Kurt Kiefer <kurt.kiefer@arthrex.com>
 Date: Fri, 22 Jul 2022 15:43:06 -0700
 Subject: [PATCH] Support cross build environment variables
 
 ---
  setup.py                     |  8 +++++---
- tools/setup_helpers/cmake.py | 14 ++++++--------
- 2 files changed, 11 insertions(+), 11 deletions(-)
+ tools/setup_helpers/cmake.py | 10 +++-------
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index f1ebab73..7fc829a0 100644
+index 4223cc92..2d434cad 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -300,7 +300,7 @@ else:
+@@ -303,7 +303,7 @@ else:
      cmake_python_library = "{}/{}".format(
          sysconfig.get_config_var("LIBDIR"),
          sysconfig.get_config_var("INSTSONAME"))
@@ -21,7 +21,7 @@ index f1ebab73..7fc829a0 100644
  
  
  ################################################################################
-@@ -814,7 +814,7 @@ def configure_extension_build():
+@@ -849,7 +849,7 @@ def configure_extension_build():
                    sources=main_sources,
                    language='c',
                    extra_compile_args=main_compile_args + extra_compile_args,
@@ -29,8 +29,8 @@ index f1ebab73..7fc829a0 100644
 +                  include_dirs=[os.environ['PYTHON_INCLUDE_DIR']],
                    library_dirs=library_dirs,
                    extra_link_args=extra_link_args + main_link_args + make_relative_rpath_args('lib'))
-     extensions.append(C)
-@@ -822,7 +822,9 @@ def configure_extension_build():
+     C_flatbuffer = Extension("torch._C_flatbuffer",
+@@ -866,7 +866,9 @@ def configure_extension_build():
      if not IS_WINDOWS:
          DL = Extension("torch._dl",
                         sources=["torch/csrc/dl.c"],
@@ -42,49 +42,38 @@ index f1ebab73..7fc829a0 100644
  
      # These extensions are built by cmake and copied manually in build_extensions()
 diff --git a/tools/setup_helpers/cmake.py b/tools/setup_helpers/cmake.py
-index ff175771..fd5c6468 100644
+index 21943619..ad834e21 100644
 --- a/tools/setup_helpers/cmake.py
 +++ b/tools/setup_helpers/cmake.py
 @@ -13,7 +13,6 @@ from typing import IO, Any, Dict, List, Optional, Union, cast
  
  from . import which
- from .env import (BUILD_DIR, IS_64BIT, IS_DARWIN, IS_WINDOWS, check_negative_env_flag)
+ from .env import BUILD_DIR, IS_64BIT, IS_DARWIN, IS_WINDOWS, check_negative_env_flag
 -from .numpy_ import USE_NUMPY, NUMPY_INCLUDE_DIR
  
  
  def _mkdir_p(d: str) -> None:
-@@ -274,7 +273,9 @@ class CMake:
-              'ONNX_NAMESPACE',
-              'ATEN_THREADING',
-              'WERROR',
--             'OPENSSL_ROOT_DIR')
-+             'OPENSSL_ROOT_DIR',
-+             'NATIVE_BUILD_DIR',
-+             'CAFFE2_CUSTOM_PROTOC_EXECUTABLE')
-         })
+@@ -358,9 +357,6 @@ class CMake:
+                 # are automatically passed to CMake; For other options you can add to additional_options above.
+                 "BUILD_PYTHON": build_python,
+                 "BUILD_TEST": build_test,
+-                # Most library detection should go to CMake script, except this one, which Python can do a much better job
+-                # due to NumPy's inherent Pythonic nature.
+-                "USE_NUMPY": USE_NUMPY,
+             }
+         )
  
-         # Aliases which are lower priority than their canonical option
-@@ -323,9 +324,6 @@ class CMake:
-             # are automatically passed to CMake; For other options you can add to additional_options above.
-             'BUILD_PYTHON': build_python,
-             'BUILD_TEST': build_test,
--            # Most library detection should go to CMake script, except this one, which Python can do a much better job
--            # due to NumPy's inherent Pythonic nature.
--            'USE_NUMPY': USE_NUMPY,
-         })
+@@ -383,10 +379,10 @@ class CMake:
+         CMake.defines(
+             args,
+             PYTHON_EXECUTABLE=sys.executable,
+-            PYTHON_LIBRARY=cmake_python_library,
+-            PYTHON_INCLUDE_DIR=sysconfig.get_path("include"),
++            PYTHON_LIBRARY=os.environ['PYTHON_LIBRARY'],
++            PYTHON_INCLUDE_DIR=os.environ['PYTHON_INCLUDE_DIR'],
+             TORCH_BUILD_VERSION=version,
+-            NUMPY_INCLUDE_DIR=NUMPY_INCLUDE_DIR,
++            NUMPY_INCLUDE_DIR=os.environ['NUMPY_INCLUDE_DIR'],
+             **build_options,
+         )
  
-         # Options starting with CMAKE_
-@@ -344,10 +342,10 @@ class CMake:
- 
-         CMake.defines(args,
-                       PYTHON_EXECUTABLE=sys.executable,
--                      PYTHON_LIBRARY=cmake_python_library,
--                      PYTHON_INCLUDE_DIR=sysconfig.get_path('include'),
-+                      PYTHON_LIBRARY=os.environ['PYTHON_LIBRARY'],
-+                      PYTHON_INCLUDE_DIR=os.environ['PYTHON_INCLUDE_DIR'],
-                       TORCH_BUILD_VERSION=version,
--                      NUMPY_INCLUDE_DIR=NUMPY_INCLUDE_DIR,
-+                      NUMPY_INCLUDE_DIR=os.environ['NUMPY_INCLUDE_DIR'],
-                       **build_options)
- 
-         expected_wrapper = '/usr/local/opt/ccache/libexec'

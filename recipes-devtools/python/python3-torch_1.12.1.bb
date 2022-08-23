@@ -1,19 +1,22 @@
 SUMMARY = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
 HOMEPAGE = "https://pytorch.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=91a5dfdaccf53b27488cb3a639e986d5"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5c853508d63a8090fa952ff1af58217d"
 
 SRC_URI = "https://github.com/pytorch/pytorch/releases/download/v${PV}/pytorch-v${PV}.tar.gz \
            file://0001-Support-cross-build-environment-variables.patch \
            file://0002-caffe2-fix-cross-compiling.patch \
            file://0003-cuda.cmake-compatibility-with-cuda.bbclass.patch \
-           file://0001-Fixes-for-yocto-build-workflow.patch \
-           file://0003-Remove-rpath-setting.patch \
+           file://0004-Fixes-for-yocto-build-workflow.patch \
+           file://0005-Remove-rpath-setting.patch \
+           file://0006-Fix-building-extensions-with-complex-CXX.patch \
+           file://0007-cpp_extension-bypass-cuda-version-checks.patch \
            "
 
-SRC_URI[sha256sum] = "dc0c2b8d13c112a2b9ea8757a475b0ce2ca97cd19c50a8b70b8c286676616f1d"
+SRC_URI[sha256sum] = "031c71073db73da732b5d01710220564ce6dd88d812ba053f0cc94296401eccb"
 
-inherit cmake setuptools3 cuda
+inherit cmake setuptools3
+require torch-cuda.inc
 
 S = "${WORKDIR}/pytorch-v${PV}"
 B = "${S}/build"
@@ -27,6 +30,7 @@ PACKAGECONFIG[fftw] = ",,fftw"
 PACKAGECONFIG[hiredis] = ",,hiredis"
 PACKAGECONFIG[tensorrt] = ",,tensorrt-core tensorrt-plugins,python3-tensorrt"
 PACKAGECONFIG[magma] = ",,magma"
+PACKAGECONFIG[onednn] = "-DUSE_MKLDNN=ON,,onednn"
 
 DEPENDS += " \
     coreutils-native \
@@ -37,6 +41,7 @@ DEPENDS += " \
     python3-pybind11-native \
     libeigen \
     sleef \
+    onednn \
 "
 
 DEPENDS:append:cuda = " \
@@ -51,18 +56,29 @@ DEPENDS:append:cuda = " \
 "
 
 EXTRA_OECMAKE:append = " \
-    -DTORCH_INSTALL_LIB_DIR=${PYTHON_SITEPACKAGES_DIR}/torch/lib \
+    -DLIBSHM_INSTALL_LIB_SUBDIR=lib/${PYTHON_DIR}/site-packages/torch/lib \
+    -DTORCH_INSTALL_LIB_DIR=lib/${PYTHON_DIR}/site-packages/torch/lib \
+    -DTORCH_INSTALL_BIN_DIR=lib/${PYTHON_DIR}/site-packages/torch/bin \
+    -DTORCH_INSTALL_INCLUDE_DIR=lib/${PYTHON_DIR}/site-packages/torch/include \
     -DPYTHON_INCLUDE_DIR=${PYTHON_INCLUDE_DIR} \
     -DUSE_SYSTEM_PYBIND11=ON \
     -DBUILD_CUSTOM_PROTOBUF=OFF \
     -DUSE_BREAKPAD=OFF \
     -DUSE_SYSTEM_EIGEN_INSTALL=ON \
     -DUSE_SYSTEM_SLEEF=ON \
+    -DUSE_DISTRIBUTED=OFF \
+    -DGLIBCXX_USE_CXX11_ABI=1 \
+"
+
+# EXTRA_OECMAKE:append:class-native = " \
+#     -DBUILD_LITE_INTERPRETER=ON \
+# "
+
+EXTRA_OECMAKE:append:class-native = " \
+    -DUSE_MKLDNN=OFF \
 "
 
 EXTRA_OECMAKE:append:cuda = " \
-    -DTORCH_CUDA_ARCH_LIST=7.2 \
-    -DCMAKE_CUDA_COMPILER_FORCED=1 \
     -DUSE_CUPTI_SO=ON \
     -DUSE_SYSTEM_NCCL=ON \
     -DUSE_SYSTEM_GLOO=ON \
@@ -86,7 +102,6 @@ LDFLAGS:append:class-target = " -L${B}/lib"
 BUILD_LDFLAGS:append:class-native = " -L${B}/lib"
 
 do_configure() {
-    export CUFLAGS="${CUFLAGS}"
     cmake_do_configure
 }
 
@@ -109,6 +124,6 @@ do_install() {
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}/torch/lib/ ${PYTHON_SITEPACKAGES_DIR}/torch/bin/"
 FILES_SOLIBSDEV = ""
 
-FILES:${PN}-dev += "${datadir}/ATen/*"
+FILES:${PN}-dev += "${datadir}/ATen/* ${PYTHON_SITEPACKAGES_DIR}/torch/include/"
 
 BBCLASSEXTEND = "native nativesdk"

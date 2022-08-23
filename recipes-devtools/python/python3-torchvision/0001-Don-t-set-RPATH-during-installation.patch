@@ -1,0 +1,22 @@
+From d9c94c97e2927a5b95e38c32d48b3460fc9041f1 Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Tue, 16 Aug 2022 14:58:44 -0700
+Subject: [PATCH] Don't set RPATH during installation
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4e222dbfa..4352a5b98 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -90,7 +90,7 @@ endif()
+ 
+ set_target_properties(${PROJECT_NAME} PROPERTIES
+   EXPORT_NAME TorchVision
+-  INSTALL_RPATH ${TORCH_INSTALL_PREFIX}/lib)
++)
+ 
+ include_directories(torchvision/csrc ${JPEG_INCLUDE_DIRS} ${PNG_INCLUDE_DIRS})
+ 

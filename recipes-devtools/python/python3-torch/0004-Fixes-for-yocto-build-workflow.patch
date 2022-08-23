@@ -1,18 +1,18 @@
-From c8acbd6657c80c1f0a5c126866c55dc8c44a088e Mon Sep 17 00:00:00 2001
+From c45ea3efb2bd8e2a4c8e34d216b77f5a264b9e2b Mon Sep 17 00:00:00 2001
 From: Kurt Kiefer <kurt.kiefer@arthrex.com>
 Date: Sun, 24 Jul 2022 23:02:47 -0700
 Subject: [PATCH] Fixes for yocto build workflow
 
 ---
  setup.py                     | 4 ++--
- tools/setup_helpers/cmake.py | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ tools/setup_helpers/cmake.py | 2 --
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 44bf5a74..ec8af7ca 100644
+index 2d434cad..18a5d7cb 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -228,7 +228,7 @@ import sysconfig
+@@ -235,7 +235,7 @@ import sysconfig
  from tools.build_pytorch_libs import build_caffe2
  from tools.setup_helpers.env import (IS_WINDOWS, IS_DARWIN, IS_LINUX,
                                       build_type)
@@ -21,7 +21,7 @@ index 44bf5a74..ec8af7ca 100644
  from tools.generate_torch_version import get_torch_version
  
  ################################################################################
-@@ -306,7 +306,7 @@ package_name = os.getenv('TORCH_PACKAGE_NAME', 'torch')
+@@ -314,7 +314,7 @@ package_type = os.getenv('PACKAGE_TYPE', 'wheel')
  version = get_torch_version()
  report("Building wheel {}-{}".format(package_name, version))
  
@@ -31,15 +31,15 @@ index 44bf5a74..ec8af7ca 100644
  
  def get_submodule_folders():
 diff --git a/tools/setup_helpers/cmake.py b/tools/setup_helpers/cmake.py
-index 51976e76..fa81df30 100644
+index ad834e21..9eb42fc2 100644
 --- a/tools/setup_helpers/cmake.py
 +++ b/tools/setup_helpers/cmake.py
-@@ -355,7 +355,7 @@ class CMake:
- 
-         from .env import build_type
- 
--        build_args = ['--build', '.', '--target', 'install', '--config', build_type.build_type_string]
-+        build_args = ['--build', '.', '--config', build_type.build_type_string]
- 
-         # Determine the parallelism according to the following
-         # priorities:
+@@ -427,8 +427,6 @@ class CMake:
+         build_args = [
+             "--build",
+             ".",
+-            "--target",
+-            "install",
+             "--config",
+             build_type.build_type_string,
+         ]

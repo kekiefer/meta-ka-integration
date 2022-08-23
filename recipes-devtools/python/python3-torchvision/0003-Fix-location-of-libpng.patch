@@ -1,0 +1,56 @@
+From c62c47487f2c0f60c6680770d371eb4744655f20 Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Mon, 22 Aug 2022 15:57:25 -0700
+Subject: [PATCH] Fix location of libpng
+
+---
+ setup.py | 34 +++-------------------------------
+ 1 file changed, 3 insertions(+), 31 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 9a1f16dd5..b9074a710 100644
+--- a/setup.py
++++ b/setup.py
+@@ -259,39 +259,11 @@ def get_extensions():
+         image_macros += [("USE_PYTHON", None)]
+ 
+     # Locating libPNG
+-    libpng = shutil.which("libpng-config")
+-    pngfix = shutil.which("pngfix")
+-    png_found = libpng is not None or pngfix is not None
++    (png_found, png_conda, png_include, png_lib) = find_library("libpng", vision_include)
++
+     print(f"PNG found: {png_found}")
+     if png_found:
+-        if libpng is not None:
+-            # Linux / Mac
+-            png_version = subprocess.run([libpng, "--version"], stdout=subprocess.PIPE)
+-            png_version = png_version.stdout.strip().decode("utf-8")
+-            print(f"libpng version: {png_version}")
+-            png_version = parse_version(png_version)
+-            if png_version >= parse_version("1.6.0"):
+-                print("Building torchvision with PNG image support")
+-                png_lib = subprocess.run([libpng, "--libdir"], stdout=subprocess.PIPE)
+-                png_lib = png_lib.stdout.strip().decode("utf-8")
+-                if "disabled" not in png_lib:
+-                    image_library += [png_lib]
+-                png_include = subprocess.run([libpng, "--I_opts"], stdout=subprocess.PIPE)
+-                png_include = png_include.stdout.strip().decode("utf-8")
+-                _, png_include = png_include.split("-I")
+-                print(f"libpng include path: {png_include}")
+-                image_include += [png_include]
+-                image_link_flags.append("png")
+-            else:
+-                print("libpng installed version is less than 1.6.0, disabling PNG support")
+-                png_found = False
+-        else:
+-            # Windows
+-            png_lib = os.path.join(os.path.dirname(os.path.dirname(pngfix)), "lib")
+-            png_include = os.path.join(os.path.dirname(os.path.dirname(pngfix)), "include", "libpng16")
+-            image_library += [png_lib]
+-            image_include += [png_include]
+-            image_link_flags.append("libpng")
++        print("Building torchvision with PNG image support")
+ 
+     # Locating libjpeg
+     (jpeg_found, jpeg_conda, jpeg_include, jpeg_lib) = find_library("jpeglib", vision_include)
