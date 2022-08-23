@@ -1,0 +1,24 @@
+From 32f07cc7d8b76133bd92147111052241b0b897fc Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+Date: Mon, 22 Aug 2022 17:25:58 -0700
+Subject: [PATCH] Fix python paths for cross build
+
+---
+ python/setup.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/python/setup.py b/python/setup.py
+index e566526..3b93976 100644
+--- a/python/setup.py
++++ b/python/setup.py
+@@ -20,8 +20,8 @@ try:
+ except Exception:
+     nthreads = 0
+ 
+-include_dirs = [os.path.dirname(sysconfig.get_path("include")),]
+-library_dirs = [get_python_lib()]
++include_dirs = [os.environ['PYTHON_INCLUDE_DIR'],]
++library_dirs = [os.environ['PYTHON_LIBRARY'],]
+ 
+ extensions = [
+     Extension(
