@@ -84,5 +84,7 @@ RDEPENDS:${PN}-runtime = "\
 # various things used for development/debugging, not production
 RDEPENDS:${PN}-development = "\
     ${PN}-runtime \
+    nsight-systems-cli \
+    python3-nvtx \
     python3-tensorrt \
 "
