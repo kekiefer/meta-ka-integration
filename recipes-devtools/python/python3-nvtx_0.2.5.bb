@@ -26,7 +26,7 @@ DEPENDS += " \
     python3-cython-native \
 "
 
-RDEPENDS += "
+RDEPENDS:${PN} += " \
     python3-core \
     cuda-nvtx \
 "
