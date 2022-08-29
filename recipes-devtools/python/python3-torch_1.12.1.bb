@@ -30,7 +30,6 @@ PACKAGECONFIG[fftw] = ",,fftw"
 PACKAGECONFIG[hiredis] = ",,hiredis"
 PACKAGECONFIG[tensorrt] = ",,tensorrt-core tensorrt-plugins,python3-tensorrt"
 PACKAGECONFIG[magma] = ",,magma"
-PACKAGECONFIG[onednn] = "-DUSE_MKLDNN=ON,,onednn"
 
 DEPENDS += " \
     coreutils-native \
@@ -41,7 +40,6 @@ DEPENDS += " \
     python3-pybind11-native \
     libeigen \
     sleef \
-    onednn \
 "
 
 DEPENDS:append:cuda = " \
