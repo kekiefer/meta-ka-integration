@@ -26,7 +26,7 @@ inherit cmake cuda
 
 COMPATIBLE_MACHINE = "(cuda)"
 
-DEPENDS += "lapack cuda-nvprof"
+DEPENDS += "lapack cuda-profiler-api"
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
 EXTRA_OECMAKE = "-DGPU_TARGET=sm_${TEGRA_CUDA_ARCHITECTURE} -DMAGMA_ENABLE_CUDA=ON"

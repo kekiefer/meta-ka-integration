@@ -46,7 +46,7 @@ DEPENDS:append:cuda = " \
     cudnn \
     cuda-cupti \
     cuda-nvml \
-    cuda-nvprof \
+    cuda-profiler-api \
     cuda-nvrtc \
     cuda-nvtx \
     gloo \
