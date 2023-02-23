@@ -1,11 +1,13 @@
 SUMMARY = "ONNX-TensorRT - TensorRT backend for running ONNX models"
 HOMEPAGE = "https://github.com/onnx/onnx-tensorrt"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e149467d209874a32715c20e9fdafac5"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=90c6355a9a91565fe861cb12af3c1af1"
 
-SRC_URI = "gitsm://github.com/onnx/onnx-tensorrt;protocol=https;branch=${PV}-GA"
+SRC_URI = "gitsm://github.com/onnx/onnx-tensorrt;protocol=https;branch=${PV}-GA \
+           file://0001-Use-external-onnx-build.patch \
+           "
 
-SRCREV = "f42daeee49f2517a954c5601f0f76bef9ed94b62"
+SRCREV = "3b008c466bcb7375aaf5cabf51b289fd34d40c44"
 
 S = "${WORKDIR}/git"
 
@@ -30,17 +32,9 @@ RDEPENDS:${PN} += "python3-numpy python3-protobuf python3-typing-extensions pyth
 RDEPENDS:${PN} += "python3-compression python3-core python3-crypt python3-dataclasses python3-datetime python3-io python3-json python3-math python3-netclient python3-numbers python3-numpy python3-pytest python3-shell python3-unittest"
 RDEPENDS:${PN} += "python3-pycuda"
 
-# export CMAKE_ARGS=" \
-#     -DONNX_USE_PROTOBUF_SHARED_LIBS=ON \
-#     -DONNX_CUSTOM_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/protoc \
-#     -DProtobuf_LIBRARY="${STAGING_LIBDIR}/libprotobuf.so" \
-# "
-
-export CMAKE_ARGS=" \
-    -DTENSORRT_ROOT=${STAGING_LIBDIR} \
-"
-
 do_configure() {
+        sed -i "/^import onnx_tensorrt/d" ${S}/setup.py
+        sed -i "s/onnx_tensorrt.__version__/\"${PV}\"/g" ${S}/setup.py
         cmake_do_configure
 }
 

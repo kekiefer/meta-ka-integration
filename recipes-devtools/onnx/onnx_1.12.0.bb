@@ -1,9 +1,10 @@
 SUMMARY = "Open Neural Network Exchange"
 HOMEPAGE = "https://github.com/onnx/onnx"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
 
-SRC_URI[sha256sum] = "9d941ba76cab55db8913ecad9dc50cefeb368460f6338a91783a5d7643f3a044"
+SRCREV = "1ba785612a79fe749aa1e478336e534743372639"
+SRC_URI[sha256sum] = "13b3e77d27523b9dbf4f30dfc9c959455859d5e34e921c44f712d69b8369eff9"
 
 inherit pypi cmake setuptools3
 
