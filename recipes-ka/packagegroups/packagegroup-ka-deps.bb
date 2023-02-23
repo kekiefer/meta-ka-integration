@@ -39,6 +39,7 @@ RDEPENDS:${PN}-detectors = "\
 RDEPENDS:${PN}-runtime = "\
     ${PN}-core \
     ${PN}-detectors \
+    onnx-tensorrt \
     python3-aiohttp \
     python3-async-timeout \
     python3-attrs \
@@ -77,8 +78,6 @@ RDEPENDS:${PN}-runtime = "\
     python3-typing-extensions \
     python3-webcolors \
     python3-yarl \
-    python3-torch \
-    python3-torchvision \
 "
 
 # various things used for development/debugging, not production
