@@ -60,7 +60,6 @@ RDEPENDS:${PN}-runtime = "\
     python3-opencv \
     python3-pandas \
     python3-pillow \
-    python3-dotenv \
     python3-engineio \
     python3-socketio \
     python3-pyturbojpeg \
