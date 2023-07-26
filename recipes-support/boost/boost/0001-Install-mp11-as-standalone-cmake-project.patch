@@ -1,0 +1,33 @@
+From 4091fe23f5afe1193e474050f2abc650071aeb8b Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kekiefer@gmail.con>
+Date: Mon, 6 Mar 2023 11:49:54 -0800
+Subject: [PATCH] Install mp11 as standalone cmake project
+
+---
+ libs/mp11/build/Jamfile.v2 | 12 ++++++++++++
+ libs/mp11/src/mp11.cpp     |  0
+ 2 files changed, 12 insertions(+)
+ create mode 100644 libs/mp11/build/Jamfile.v2
+ create mode 100644 libs/mp11/src/mp11.cpp
+
+diff --git a/libs/mp11/build/Jamfile.v2 b/libs/mp11/build/Jamfile.v2
+new file mode 100644
+index 000000000..81dd2ca58
+--- /dev/null
++++ b/libs/mp11/build/Jamfile.v2
+@@ -0,0 +1,12 @@
++# Boost.Mp11 library
++
++project /boost/mp11
++    : source-location ../src
++    : requirements <link>static
++;
++
++lib boost_mp11
++    : mp11.cpp
++;
++
++boost-install boost_mp11 ;
+diff --git a/libs/mp11/src/mp11.cpp b/libs/mp11/src/mp11.cpp
+new file mode 100644
+index 000000000..e69de29bb

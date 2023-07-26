@@ -1,1 +1,0 @@
-RUNTIMETARGET:append = " libquadmath"

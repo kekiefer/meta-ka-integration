@@ -9,10 +9,9 @@ S = "${WORKDIR}/mmcv-${PV}"
 
 inherit setuptools3 pypi
 
-#PACKAGECONFIG ?= "all build optional tests"
-PACKAGECONFIG[all] = ",,,python3-pillow python3-pyturbojpeg python3-addict python3-coverage python3-lmdb python3-ninja python3-numpy python3-packaging python3-protobuf~ python3-pytest python3-pytest-runner python3-pyyaml python3-scipy python3-tifffile python3-yapf"
-PACKAGECONFIG[build] = ",,,python3-pytest-runner"
+#PACKAGECONFIG ?= "all optional tests"
+PACKAGECONFIG[all] = ",,,python3-pillow python3-pyturbojpeg python3-addict python3-coverage python3-lmdb python3-ninja python3-numpy python3-packaging python3-protobuf~ python3-pyyaml python3-scipy python3-tifffile python3-yapf"
 PACKAGECONFIG[optional] = ",,,python3-ninja"
-PACKAGECONFIG[tests] = ",,,python3-pyturbojpeg python3-coverage python3-lmdb python3-protobuf~ python3-pytest python3-scipy python3-tifffile"
+PACKAGECONFIG[tests] = ",,,python3-pyturbojpeg python3-coverage python3-lmdb python3-protobuf~ python3-pytest python3-pytest-runner python3-scipy python3-tifffile"
 
 RDEPENDS:${PN} += "python3-pillow python3-addict python3-numpy python3-opencv python3-packaging python3-pyyaml python3-yapf"

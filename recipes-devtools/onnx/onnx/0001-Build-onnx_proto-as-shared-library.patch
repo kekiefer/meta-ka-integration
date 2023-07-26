@@ -1,0 +1,22 @@
+From 67a48c44ffd659a877f3ac75407bcb431176a027 Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kekiefer@gmail.con>
+Date: Tue, 7 Mar 2023 13:36:50 -0800
+Subject: [PATCH] Build onnx_proto as shared library
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4dd56b6..cdbfbac 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -367,7 +367,7 @@ list(REMOVE_ITEM __tmp_srcs "${ONNX_ROOT}/onnx/cpp2py_export.cc")
+ list(REMOVE_ITEM __tmp_srcs ${onnx_gtests_src})
+ list(APPEND ONNX_SRCS ${__tmp_srcs})
+ 
+-add_library(onnx_proto ${ONNX_PROTO_SRCS} ${ONNX_PROTO_HDRS})
++add_library(onnx_proto SHARED ${ONNX_PROTO_SRCS} ${ONNX_PROTO_HDRS})
+ add_dependencies(onnx_proto gen_onnx_operators_proto gen_onnx_data_proto)
+ target_include_directories(onnx_proto PUBLIC
+   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>

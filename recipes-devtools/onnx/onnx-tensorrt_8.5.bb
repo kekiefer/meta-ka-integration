@@ -3,34 +3,26 @@ HOMEPAGE = "https://github.com/onnx/onnx-tensorrt"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=90c6355a9a91565fe861cb12af3c1af1"
 
-SRC_URI = "gitsm://github.com/onnx/onnx-tensorrt;protocol=https;branch=${PV}-GA \
-           file://0001-Use-external-onnx-build.patch \
+SRC_URI = "git://github.com/onnx/onnx-tensorrt;protocol=https;branch=main \
+           file://0001-Link-to-external-onnx.patch \
            "
 
-SRCREV = "3b008c466bcb7375aaf5cabf51b289fd34d40c44"
-
-S = "${WORKDIR}/git"
+SRCREV = "369d6676423c2a6dbf4a5665c4b5010240d99d3c"
 
 inherit cmake setuptools3 cuda
 
+COMPATIBLE_MACHINE = "(cuda)"
+
+S = "${WORKDIR}/git"
+B = "${S}"
+
 DEPENDS += " \
     onnx \
-    googlebenchmark \
-    cmake-native \
-    protobuf \
-    python3-numpy-native \
-    python3-protobuf \
-    python3-pytest-runner-native \
-    python3-pybind11-native \
-    python3-protobuf-native \
     tensorrt-core \
     tensorrt-plugins \
 "
 
-RDEPENDS:${PN} += "onnx python3-core python3-ctypes python3-numpy python3-six python3-tensorrt"
-RDEPENDS:${PN} += "python3-numpy python3-protobuf python3-typing-extensions python3-twine"
-RDEPENDS:${PN} += "python3-compression python3-core python3-crypt python3-dataclasses python3-datetime python3-io python3-json python3-math python3-netclient python3-numbers python3-numpy python3-pytest python3-shell python3-unittest"
-RDEPENDS:${PN} += "python3-pycuda"
+RDEPENDS:${PN} += "onnx python3-numpy python3-pycuda"
 
 do_configure() {
         sed -i "/^import onnx_tensorrt/d" ${S}/setup.py

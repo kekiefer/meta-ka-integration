@@ -1,17 +1,17 @@
-From 077c3734f737a149c7af4f2cab57e41e1a3839c6 Mon Sep 17 00:00:00 2001
-From: Kurt Kiefer <kurt.kiefer@arthrex.com>
-Date: Wed, 22 Feb 2023 21:53:27 -0800
-Subject: [PATCH] Use external onnx build
+From 70af3a7fb67e5394ca544f78c0fc815db164af20 Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kekiefer@gmail.con>
+Date: Tue, 7 Mar 2023 09:50:50 -0800
+Subject: [PATCH] Link to external onnx
 
 ---
- CMakeLists.txt | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
+ CMakeLists.txt | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c015bd9..74be642 100644
+index c015bd9..5493db5 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -66,14 +66,9 @@ else()
+@@ -66,14 +66,7 @@ else()
    set(PROTOBUF_LIB "protobuf::libprotobuf")
  endif()
  
@@ -23,9 +23,7 @@ index c015bd9..74be642 100644
 -  add_definitions("-DONNX_NAMESPACE=${ONNX_NAMESPACE}")
 -  add_subdirectory(third_party/onnx EXCLUDE_FROM_ALL)
 -endif()
-+add_definitions("-DONNX_NAMESPACE=onnx")
-+add_definitions("-DONNX_ML=ON")
-+add_definitions("-DONNXIFI_ENABLE_EXT=ON")
++FIND_PACKAGE(ONNX REQUIRED)
  
  # CUDA
  if (NOT CUDA_TOOLKIT_ROOT_DIR)

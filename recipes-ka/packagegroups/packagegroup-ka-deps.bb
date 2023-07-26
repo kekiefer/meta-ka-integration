@@ -8,38 +8,17 @@ PR = "r1"
 inherit packagegroup
 
 PACKAGES += "\
-    ${PN}-core \
-    ${PN}-detectors \
     ${PN}-runtime \
     ${PN}-development \
 "
 
 RRECOMMENDS:${PN} = "\
-    ${PN}-core \
     ${PN}-runtime \
-    ${PN}-development \
-"
-
-RDEPENDS:${PN}-core = "\
-    gstreamer1.0-plugins-bad \
-    gstreamer1.0-plugins-base \
-    gstreamer1.0-plugins-good \
-    gstreamer1.0-plugins-tegra \
-    python3-pygobject \
-"
-
-RDEPENDS:${PN}-detectors = "\
-    python3-dvclive \
-    python3-mmcls \
-    python3-mmcv \
-    python3-openmim \
 "
 
 # Packages for K-A integration runtime
 RDEPENDS:${PN}-runtime = "\
-    ${PN}-core \
-    ${PN}-detectors \
-    onnx-tensorrt \
+    onnxruntime \
     python3-aiohttp \
     python3-async-timeout \
     python3-attrs \
@@ -56,7 +35,6 @@ RDEPENDS:${PN}-runtime = "\
     python3-msgpack \
     python3-nanoid \
     python3-numpy \
-    python3-omegaconf \
     python3-opencv \
     python3-pandas \
     python3-pillow \
@@ -81,8 +59,12 @@ RDEPENDS:${PN}-runtime = "\
 
 # various things used for development/debugging, not production
 RDEPENDS:${PN}-development = "\
-    ${PN}-runtime \
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-tegra \
     nsight-systems-cli \
     python3-nvtx \
+    python3-pygobject \
     python3-tensorrt \
 "
