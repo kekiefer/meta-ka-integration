@@ -23,11 +23,13 @@ RDEPENDS:${PN}-runtime = "\
     python3-async-timeout \
     python3-attrs \
     python3-boto3 \
+    python3-cloudpathlib \
     python3-cloudpickle \
     python3-dataclass-wizard \
     python3-filterpy \
     python3-genson \
     python3-greenlet \
+    python3-haggis \
     python3-idna \
     python3-injector \
     python3-iopath \
@@ -35,6 +37,7 @@ RDEPENDS:${PN}-runtime = "\
     python3-msgpack \
     python3-nanoid \
     python3-numpy \
+    python3-omegaconf \
     python3-opencv \
     python3-pandas \
     python3-pillow \
