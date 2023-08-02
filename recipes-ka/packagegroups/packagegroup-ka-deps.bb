@@ -67,6 +67,7 @@ RDEPENDS:${PN}-development = "\
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-tegra \
     nsight-systems-cli \
+    python3-dotenv \
     python3-nvtx \
     python3-pygobject \
     python3-tensorrt \
