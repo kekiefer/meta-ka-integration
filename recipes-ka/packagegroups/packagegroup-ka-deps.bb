@@ -8,16 +8,18 @@ PR = "r1"
 inherit packagegroup
 
 PACKAGES += "\
-    ${PN}-runtime \
+    ${PN}-drt \
+    ${PN}-art \
     ${PN}-development \
 "
 
 RRECOMMENDS:${PN} = "\
-    ${PN}-runtime \
+    ${PN}-drt \
+    ${PN}-art \
 "
 
 # Packages for K-A integration runtime
-RDEPENDS:${PN}-runtime = "\
+RDEPENDS:${PN}-drt = "\
     onnxruntime \
     python3-aiohttp \
     python3-async-timeout \
@@ -58,6 +60,10 @@ RDEPENDS:${PN}-runtime = "\
     python3-typing-extensions \
     python3-webcolors \
     python3-yarl \
+"
+
+RDEPENDS:${PN}-art = "\
+    nodejs \
 "
 
 # various things used for development/debugging, not production
