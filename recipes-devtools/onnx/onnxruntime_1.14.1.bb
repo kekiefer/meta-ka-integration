@@ -22,7 +22,8 @@ B = "${S}"
 DEPENDS += " \
     boost \
     date \
-    flatbuffers1 \
+    flatbuffers \
+    flatbuffers-native \
     libeigen \
     nlohmann-json \
     nsync \
@@ -77,6 +78,7 @@ do_configure() {
 
 do_compile:prepend() {
     touch ${S}/requirements.txt
+    python3 ${S}/onnxruntime/core/flatbuffers/schema/compile_schema.py -f ${STAGING_BINDIR_NATIVE}/flatc
 }
 
 do_compile() {
