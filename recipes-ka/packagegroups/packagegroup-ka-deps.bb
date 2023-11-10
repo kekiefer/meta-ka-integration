@@ -28,6 +28,8 @@ RDEPENDS:${PN}-drt = "\
     python3-cloudpathlib \
     python3-cloudpickle \
     python3-dataclass-wizard \
+    python3-dotenv \
+    python3-engineio \
     python3-filterpy \
     python3-genson \
     python3-greenlet \
@@ -36,6 +38,7 @@ RDEPENDS:${PN}-drt = "\
     python3-injector \
     python3-iopath \
     python3-jsonschema \
+    python3-matplotlib \
     python3-msgpack \
     python3-nanoid \
     python3-numpy \
@@ -43,8 +46,6 @@ RDEPENDS:${PN}-drt = "\
     python3-opencv \
     python3-pandas \
     python3-pillow \
-    python3-engineio \
-    python3-socketio \
     python3-pyturbojpeg \
     python3-pyyaml \
     python3-pyzmq \
@@ -55,6 +56,7 @@ RDEPENDS:${PN}-drt = "\
     python3-scipy \
     python3-seaborn \
     python3-shapely \
+    python3-socketio \
     python3-tqdm \
     python3-typing-extensions \
     python3-webcolors \
