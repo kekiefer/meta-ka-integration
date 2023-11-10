@@ -1,0 +1,27 @@
+From 02fb70e1b5eac8c386848342da3269d6bb3c0cb6 Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kekiefer@gmail.com>
+Date: Fri, 17 Nov 2023 10:56:48 -0800
+Subject: [PATCH] Export cmake config file
+
+---
+ CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6b1f1dc..b28528b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -403,6 +403,7 @@ install (TARGETS nsync
+ 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Development)
+ 
+ install (TARGETS nsync_cpp OPTIONAL
++	EXPORT nsyncConfig
+ 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT RuntimeLibraries
+ 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Development)
+ 
+@@ -427,3 +428,5 @@ foreach (NSYNC_INCLUDE ${NSYNC_INCLUDES})
+ 		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+ 		COMPONENT Development)
+ endforeach ()
++
++install( EXPORT nsyncConfig NAMESPACE nsync:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nsync )

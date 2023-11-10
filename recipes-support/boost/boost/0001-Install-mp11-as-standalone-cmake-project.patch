@@ -3,6 +3,8 @@ From: Kurt Kiefer <kekiefer@gmail.con>
 Date: Mon, 6 Mar 2023 11:49:54 -0800
 Subject: [PATCH] Install mp11 as standalone cmake project
 
+Upstream-Status: Inappropriate [Arthrex specific]
+
 ---
  libs/mp11/build/Jamfile.v2 | 12 ++++++++++++
  libs/mp11/src/mp11.cpp     |  0

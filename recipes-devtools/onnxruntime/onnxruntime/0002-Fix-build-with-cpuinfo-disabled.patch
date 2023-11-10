@@ -1,17 +1,17 @@
-From e4ed50738b04f0b7ee7cb50e25b643e661332161 Mon Sep 17 00:00:00 2001
+From 41c1f545c7db770a18fedc7b7c4f1e0bc300e53d Mon Sep 17 00:00:00 2001
 From: Kurt Kiefer <kekiefer@gmail.con>
 Date: Mon, 6 Mar 2023 21:11:25 -0800
-Subject: [PATCH] Fix build with cpuinfo disabled
+Subject: [PATCH 3/4] Fix build with cpuinfo disabled
 
 ---
  onnxruntime/core/common/cpuid_info.cc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/onnxruntime/core/common/cpuid_info.cc b/onnxruntime/core/common/cpuid_info.cc
-index b950e4e734..2acd08da0e 100644
+index a23409292b..86db36814a 100644
 --- a/onnxruntime/core/common/cpuid_info.cc
 +++ b/onnxruntime/core/common/cpuid_info.cc
-@@ -136,9 +136,6 @@ void CPUIDInfo::ArmLinuxInit() {
+@@ -135,9 +135,6 @@ void CPUIDInfo::ArmLinuxInit() {
      LOGS_DEFAULT(WARNING) << "Failed to init pytorch cpuinfo library, may cause CPU EP performance degradation due to undetected CPU features.";
      return;
    }
@@ -21,9 +21,9 @@ index b950e4e734..2acd08da0e 100644
  
    if (pytorch_cpuinfo_init_) {
      is_hybrid_ = cpuinfo_get_uarchs_count() > 1;
-@@ -166,6 +163,9 @@ void CPUIDInfo::ArmLinuxInit() {
-   } else {
+@@ -167,6 +164,9 @@ void CPUIDInfo::ArmLinuxInit() {
      has_arm_neon_dot_ = ((getauxval(AT_HWCAP) & HWCAP_ASIMDDP) != 0);
+     has_fp16_ |= has_arm_neon_dot_;
    }
 +#else
 +  pytorch_cpuinfo_init_ = false;
@@ -31,3 +31,6 @@ index b950e4e734..2acd08da0e 100644
  }
  
  #elif defined(_WIN32)
+-- 
+2.25.1
+
