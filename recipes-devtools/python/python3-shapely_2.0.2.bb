@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/shapely/shapely"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=771eb47113291428a083f6bf398fa3cb"
 
-SRC_URI[sha256sum] = "66a6b1a3e72ece97fc85536a281476f9b7794de2e646ca8a4517e2e3c1446893"
+SRC_URI[sha256sum] = "1713cc04c171baffc5b259ba8531c58acc2a301707b7f021d88a15ed090649e7"
 
 S = "${WORKDIR}/shapely-${PV}"
 
