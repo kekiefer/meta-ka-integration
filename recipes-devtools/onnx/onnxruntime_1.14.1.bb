@@ -46,6 +46,7 @@ RDEPENDS:${PN} += " \
     python3-flatbuffers \
     python3-numpy \
     python3-protobuf \
+    python3-sympy \
 "
 
 EXTRA_OECMAKE = " \
