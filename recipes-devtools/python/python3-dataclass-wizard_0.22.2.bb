@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/rnag/dataclass-wizard"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=82e8e53f4dc2ba73d3c6804188bdb239"
 
-SRC_URI[sha256sum] = "77a6584a758788ca0d32cf9d09ebbd3cb12e5eb5dcded4d846e358257f5fc3a0"
+SRC_URI[sha256sum] = "211f842e5e9a8ace50ba891ef428cd78c82579fb98024f80f3e630ca8d1946f6"
 
 S = "${WORKDIR}/dataclass-wizard-${PV}"
 
