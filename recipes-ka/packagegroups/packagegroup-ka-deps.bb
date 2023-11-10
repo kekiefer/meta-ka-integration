@@ -55,7 +55,6 @@ RDEPENDS:${PN}-drt = "\
     python3-scipy \
     python3-seaborn \
     python3-shapely \
-    python3-tabulate \
     python3-tqdm \
     python3-typing-extensions \
     python3-webcolors \
@@ -76,5 +75,4 @@ RDEPENDS:${PN}-development = "\
     python3-dotenv \
     python3-nvtx \
     python3-pygobject \
-    python3-tensorrt \
 "
