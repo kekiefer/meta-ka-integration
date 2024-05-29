@@ -26,6 +26,7 @@ EXTRA_OECMAKE = " \
     -DProtobuf_LIBRARY="${STAGING_LIBDIR}/libprotobuf.so" \
     -DONNX_DISABLE_STATIC_REGISTRATION=ON \
     -DBUILD_ONNX_PYTHON=ON \
+    -DCMAKE_CXX_STANDARD=17 \
 "
 
 FILES:${PN} += "${libdir}/*.so"
