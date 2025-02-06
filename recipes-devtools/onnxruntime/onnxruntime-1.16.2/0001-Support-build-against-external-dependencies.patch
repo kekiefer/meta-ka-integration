@@ -1,26 +1,26 @@
-From a71942ef48a332ccd2bcb20f71d83721875a39db Mon Sep 17 00:00:00 2001
+From dfbc1550f52fadbf6394666c3e1c9389946f6b3b Mon Sep 17 00:00:00 2001
 From: Kurt Kiefer <kekiefer@gmail.con>
 Date: Mon, 6 Mar 2023 21:10:55 -0800
 Subject: [PATCH] Support build against external dependencies
 
 ---
- cmake/external/onnxruntime_external_deps.cmake | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ cmake/external/onnxruntime_external_deps.cmake | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/cmake/external/onnxruntime_external_deps.cmake b/cmake/external/onnxruntime_external_deps.cmake
-index 8839dbc8fd..7875561d19 100644
+index 8e412c7847..bc2a2f3cb3 100644
 --- a/cmake/external/onnxruntime_external_deps.cmake
 +++ b/cmake/external/onnxruntime_external_deps.cmake
-@@ -200,7 +200,7 @@ FetchContent_Declare(
+@@ -166,7 +166,7 @@ FetchContent_Declare(
    URL ${DEP_URL_protobuf}
    URL_HASH SHA1=${DEP_SHA1_protobuf}
    PATCH_COMMAND ${ONNXRUNTIME_PROTOBUF_PATCH_COMMAND}
 -  FIND_PACKAGE_ARGS 3.21.12 NAMES Protobuf
 +  FIND_PACKAGE_ARGS NAMES Protobuf
  )
- 
  set(protobuf_BUILD_TESTS OFF CACHE BOOL "Build protobuf tests" FORCE)
-@@ -237,6 +237,7 @@ FetchContent_Declare(
+ if (CMAKE_SYSTEM_NAME STREQUAL "Android")
+@@ -196,6 +196,7 @@ FetchContent_Declare(
    mp11
    URL ${DEP_URL_mp11}
    URL_HASH SHA1=${DEP_SHA1_mp11}
@@ -28,3 +28,11 @@ index 8839dbc8fd..7875561d19 100644
  )
  
  set(JSON_BuildTests OFF CACHE INTERNAL "")
+@@ -300,6 +301,7 @@ if(onnxruntime_USE_CUDA)
+     URL ${DEP_URL_microsoft_gsl}
+     URL_HASH SHA1=${DEP_SHA1_microsoft_gsl}
+     PATCH_COMMAND ${Patch_EXECUTABLE} --binary --ignore-whitespace -p1 < ${PROJECT_SOURCE_DIR}/patches/gsl/1064.patch
++    FIND_PACKAGE_ARGS NAMES Microsoft.GSL
+   )
+ else()
+   FetchContent_Declare(

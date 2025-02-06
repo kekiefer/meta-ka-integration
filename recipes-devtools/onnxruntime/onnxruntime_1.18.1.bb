@@ -5,18 +5,22 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 
 SRC_URI = "gitsm://github.com/microsoft/onnxruntime;protocol=https;name=onnxruntime;branch=rel-${PV} \
-           gitsm://github.com/onnx/onnx.git;protocol=https;branch=rel-1.15.0;name=onnx;destsuffix=git/_deps/onnx-src \
+           gitsm://github.com/NVIDIA/cutlass.git;protocol=https;branch=main;name=cutlass;destsuffix=git/_deps/cutlass-src \
+           gitsm://github.com/onnx/onnx.git;protocol=https;branch=rel-1.16.0;name=onnx;destsuffix=git/_deps/onnx-src \
            file://0001-Support-build-against-external-dependencies.patch \
-           file://0002-Fix-build-with-cpuinfo-disabled.patch \
-           file://0003-Fix-compilation-with-newer-flatbuffers-17164.patch \
+           file://0002-Build-Change-onnxruntime_NVCC_THREADS-from-option-to.patch \
            "
 
-SRCREV_FORMAT = "onnxruntime_onnx"
+SRCREV_FORMAT = "onnxruntime_cutlass_onnx"
 
-SRCREV_onnxruntime = "0c5b95fc86750526d09ee9e669a98506116c6bde"
-SRCREV_onnx = "b86cc54efce19530fb953e4b21f57e6b3888534c"
+SRCREV_onnxruntime = "387127404e6c1d84b3468c387d864877ed1c67fe"
+SRCREV_cutlass = "6f47420213f757831fae65c686aa471749fa8d60"
+SRCREV_onnx = "990217f043af7222348ca8f0301e17fa7b841781"
 
 COMPATIBLE_MACHINE = "(cuda)"
+
+# tegra194 is stuck on r35 which has an incompatible cuda abi
+COMPATIBLE_MACHINE:tegra194 = "^$"
 
 inherit cmake setuptools3 cuda
 
@@ -26,7 +30,8 @@ B = "${S}"
 DEPENDS += " \
     abseil-cpp \
     boost \
-    date2 \
+    cudnn \
+    date \
     flatbuffers \
     flatbuffers-native \
     libeigen \
@@ -35,6 +40,7 @@ DEPENDS += " \
     microsoft-gsl \
     protobuf \
     protobuf-native \
+    python3-protobuf-native \
     python3-numpy-native \
     python3-packaging-native \
     python3-pybind11 \
@@ -56,7 +62,6 @@ RDEPENDS:${PN} += " \
 EXTRA_OECMAKE = " \
     -DONNX_CUSTOM_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/protoc \
     -Donnxruntime_BUILD_UNIT_TESTS=OFF \
-    -Donnxruntime_DISABLE_ABSEIL=ON \
     -Donnxruntime_ENABLE_PYTHON=ON \
     -Donnxruntime_USE_TENSORRT=ON \
     -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=TRUE \
