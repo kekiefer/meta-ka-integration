@@ -3,6 +3,7 @@ From: Kurt Kiefer <kekiefer@gmail.con>
 Date: Mon, 6 Mar 2023 12:02:34 -0800
 Subject: [PATCH] Make compatible with NVCC
 
+Upstream-Status: Inappropriate [Yocto specific]
 ---
  include/gsl/assert | 2 +-
  include/gsl/byte   | 2 +-
