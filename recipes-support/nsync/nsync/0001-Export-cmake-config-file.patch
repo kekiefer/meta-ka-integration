@@ -3,6 +3,7 @@ From: Kurt Kiefer <kekiefer@gmail.com>
 Date: Fri, 17 Nov 2023 10:56:48 -0800
 Subject: [PATCH] Export cmake config file
 
+Upstream-Status: Inappropriate [Yocto specific]
 ---
  CMakeLists.txt | 3 +++
  1 file changed, 3 insertions(+)
