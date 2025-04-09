@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 
 SRC_URI = "gitsm://github.com/microsoft/onnxruntime;protocol=https;name=onnxruntime;branch=rel-${PV} \
            gitsm://github.com/onnx/onnx.git;protocol=https;branch=rel-1.15.0;name=onnx;destsuffix=git/_deps/onnx-src \
+           gitsm://github.com/boostorg/mp11.git;protocol=https;branch=develop;name=mp11;destsuffix=git/_deps/mp11-src \
            file://0001-Support-build-against-external-dependencies.patch \
            file://0002-Fix-build-with-cpuinfo-disabled.patch \
            file://0003-Fix-compilation-with-newer-flatbuffers-17164.patch \
@@ -15,6 +16,7 @@ SRCREV_FORMAT = "onnxruntime_onnx"
 
 SRCREV_onnxruntime = "0c5b95fc86750526d09ee9e669a98506116c6bde"
 SRCREV_onnx = "b86cc54efce19530fb953e4b21f57e6b3888534c"
+SRCREV_mp11 = "7bc4e1ae9b36ec8ee635c3629b59ec525bbe82b9"
 
 COMPATIBLE_MACHINE = "(cuda)"
 
@@ -25,7 +27,6 @@ B = "${S}"
 
 DEPENDS += " \
     abseil-cpp \
-    boost \
     date2 \
     flatbuffers \
     flatbuffers-native \

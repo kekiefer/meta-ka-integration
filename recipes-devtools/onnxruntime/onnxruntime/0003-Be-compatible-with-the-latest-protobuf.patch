@@ -1,0 +1,43 @@
+From 206da23ce27c6b220cc364c3c1f05232a66335dc Mon Sep 17 00:00:00 2001
+From: Kurt Kiefer <kekiefer@gmail.com>
+Date: Wed, 9 Apr 2025 08:50:49 -0700
+Subject: [PATCH] Be compatible with the latest protobuf
+
+Upstream-Status: Backport [https://github.com/microsoft/onnxruntime/pull/23260]
+---
+ onnxruntime/core/graph/graph.cc | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/onnxruntime/core/graph/graph.cc b/onnxruntime/core/graph/graph.cc
+index c2a361fc08..51472f044e 100644
+--- a/onnxruntime/core/graph/graph.cc
++++ b/onnxruntime/core/graph/graph.cc
+@@ -1234,10 +1234,12 @@ Graph::Graph(const Model& owning_model,
+ 
+     // Remove sparse_initializers from protobuf to save memory as they are converted to dense now
+     graph_proto_->mutable_sparse_initializer()->Clear();
++#if GOOGLE_PROTOBUF_VERSION < 5026000
+     const int sparse_num_cleared = graph_proto_->sparse_initializer().ClearedCount();
+     for (int i = 0; i < sparse_num_cleared; ++i) {
+       delete graph_proto_->mutable_sparse_initializer()->ReleaseCleared();
+     }
++#endif
+   }
+ #endif
+ 
+@@ -3508,10 +3510,12 @@ void Graph::CleanAllInitializedTensors() noexcept {
+   // and can be reused. Need to explicitly release the cleared objects and free the
+   // memory.
+   graph_proto_->mutable_initializer()->Clear();
++#if GOOGLE_PROTOBUF_VERSION < 5026000
+   const int num_cleared = graph_proto_->initializer().ClearedCount();
+   for (int i = 0; i < num_cleared; i++) {
+     delete graph_proto_->mutable_initializer()->ReleaseCleared();
+   }
++#endif
+ }
+ 
+ const ONNX_NAMESPACE::TensorProto* Graph::GetConstantInitializer(const std::string& initializer_name,
+-- 
+2.34.1
+

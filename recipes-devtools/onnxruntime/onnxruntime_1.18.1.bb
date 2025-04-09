@@ -7,14 +7,17 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 SRC_URI = "gitsm://github.com/microsoft/onnxruntime;protocol=https;name=onnxruntime;branch=rel-${PV} \
            gitsm://github.com/NVIDIA/cutlass.git;protocol=https;branch=main;name=cutlass;destsuffix=git/_deps/cutlass-src \
            gitsm://github.com/onnx/onnx.git;protocol=https;branch=rel-1.16.0;name=onnx;destsuffix=git/_deps/onnx-src \
+           gitsm://github.com/boostorg/mp11.git;protocol=https;branch=develop;name=mp11;destsuffix=git/_deps/mp11-src \
            file://0001-Support-build-against-external-dependencies.patch \
            file://0002-Build-Change-onnxruntime_NVCC_THREADS-from-option-to.patch \
+           file://0003-Be-compatible-with-the-latest-protobuf.patch \
            "
 
 SRCREV_FORMAT = "onnxruntime_cutlass_onnx"
 
 SRCREV_onnxruntime = "387127404e6c1d84b3468c387d864877ed1c67fe"
 SRCREV_cutlass = "6f47420213f757831fae65c686aa471749fa8d60"
+SRCREV_mp11 = "0a0b5fb001ce0233ae3a6f99d849c0649e5a7361"
 SRCREV_onnx = "990217f043af7222348ca8f0301e17fa7b841781"
 
 COMPATIBLE_MACHINE = "(cuda)"
@@ -29,7 +32,6 @@ B = "${S}"
 
 DEPENDS += " \
     abseil-cpp \
-    boost \
     cudnn \
     date \
     flatbuffers \
@@ -78,7 +80,7 @@ EXTRA_OECMAKE = " \
     -DCMAKE_CXX_STANDARD=17 \
 "
 
-OECMAKE_CXX_FLAGS:append = " -Wno-array-bounds -Wno-deprecated-declarations -Wno-unused-variable"
+OECMAKE_CXX_FLAGS:append = " -Wno-array-bounds -Wno-deprecated-declarations -Wno-unused-variable -Wno-template-id-cdtor -Wno-range-loop-construct -Wno-maybe-uninitialized"
 
 OECMAKE_SOURCEPATH = "${S}/cmake"
 SETUPTOOLS_BUILD_ARGS = "--wheel_name_suffix=gpu --cuda_version=${CUDA_VERSION}"
