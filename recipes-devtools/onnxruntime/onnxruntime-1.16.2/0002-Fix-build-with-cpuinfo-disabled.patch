@@ -3,6 +3,7 @@ From: Kurt Kiefer <kekiefer@gmail.con>
 Date: Mon, 6 Mar 2023 21:11:25 -0800
 Subject: [PATCH 3/4] Fix build with cpuinfo disabled
 
+Upstream-Status: Inappropriate [Yocto specific]
 ---
  onnxruntime/core/common/cpuid_info.cc | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)

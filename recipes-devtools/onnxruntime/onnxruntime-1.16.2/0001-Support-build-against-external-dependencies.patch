@@ -3,6 +3,7 @@ From: Kurt Kiefer <kekiefer@gmail.con>
 Date: Mon, 6 Mar 2023 21:10:55 -0800
 Subject: [PATCH] Support build against external dependencies
 
+Upstream-Status: Inappropriate [Yocto specific]
 ---
  cmake/external/onnxruntime_external_deps.cmake | 10 ++++------
  1 file changed, 4 insertions(+), 6 deletions(-)

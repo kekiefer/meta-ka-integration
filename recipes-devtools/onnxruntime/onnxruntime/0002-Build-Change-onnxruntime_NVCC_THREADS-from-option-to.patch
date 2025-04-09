@@ -25,6 +25,8 @@ This error only occurred if compiling ONNX Runtime via CMake with
 `onnxruntime_NVCC_THREADS` with a string value:
 
 https://github.com/microsoft/onnxruntime/blob/f1fef19b6e248023ec23b85bea8644ab2b95e831/tools/ci_build/build.py#L1152-L1154
+
+Upstream-Status: Inappropriate [Yocto specific]
 ---
  cmake/onnxruntime_providers_cuda.cmake | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
