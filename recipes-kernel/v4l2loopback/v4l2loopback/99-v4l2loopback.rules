@@ -1,1 +1,0 @@
-KERNEL=="v4l2loopback", OWNER="root", GROUP="video", MODE="0660"
