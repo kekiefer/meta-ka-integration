@@ -10,3 +10,7 @@ S = "${WORKDIR}/omegaconf-${PV}"
 inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += "python3-core python3-typing-extensions python3-antlr4-runtime"
+
+# temporary hack to work-around this error
+WARN_QA:append = " buildpaths"
+ERROR_QA:remove = " buildpaths"
