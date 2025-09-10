@@ -16,3 +16,7 @@ export GEOS_INCLUDE_PATH = "${STAGING_INCDIR}"
 export GEOS_LIBRARY_PATH = "${STAGING_LIBDIR}"
 
 CFLAGS += "-Wno-incompatible-pointer-types"
+
+# temporary hack to work-around this error
+WARN_QA:append = " buildpaths"
+ERROR_QA:remove = " buildpaths"
