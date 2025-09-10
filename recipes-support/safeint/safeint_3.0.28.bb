@@ -10,3 +10,5 @@ inherit cmake
 do_install:append() {
     rm -rf ${D}${datadir}
 }
+
+EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
