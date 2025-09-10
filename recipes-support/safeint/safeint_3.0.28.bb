@@ -5,8 +5,6 @@ SRC_URI = "git://github.com/dcleblanc/SafeInt.git;protocol=https;branch=master"
 
 SRCREV = "ff15c6ada150a5018c5ef2172401cb4529eac9c0"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 do_install:append() {

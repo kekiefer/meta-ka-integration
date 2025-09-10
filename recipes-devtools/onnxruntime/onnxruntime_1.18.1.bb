@@ -27,7 +27,6 @@ COMPATIBLE_MACHINE:tegra194 = "^$"
 
 inherit cmake setuptools3 cuda
 
-S = "${WORKDIR}/git"
 B = "${S}"
 
 DEPENDS += " \

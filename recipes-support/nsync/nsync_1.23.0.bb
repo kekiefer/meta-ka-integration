@@ -7,6 +7,4 @@ SRC_URI = "git://github.com/google/nsync.git;protocol=https;branch=master \
 
 SRCREV = "436617053d0f39a1019a371c3a9aa599b3cb2cea"
 
-S = "${WORKDIR}/git"
-
 inherit cmake

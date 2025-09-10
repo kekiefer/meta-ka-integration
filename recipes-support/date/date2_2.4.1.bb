@@ -9,7 +9,6 @@ SRC_URI = " \
 	git://github.com/HowardHinnant/date.git;protocol=https;branch=master \
 "
 
-S = "${WORKDIR}/git"
 SRCREV = "e7e1482087f58913b80a20b04d5c58d9d6d90155"
 
 inherit cmake

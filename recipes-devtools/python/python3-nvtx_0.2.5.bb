@@ -17,8 +17,6 @@ SRC_URI = "git://github.com/NVIDIA/NVTX;protocol=https;branch=dev \
            "
 SRCREV = "3c73121518c12d896200960e63b663e12aa52acb"
 
-S = "${WORKDIR}/git"
-
 inherit setuptools3 cuda
 
 DEPENDS += " \

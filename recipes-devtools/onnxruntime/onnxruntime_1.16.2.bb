@@ -22,7 +22,6 @@ COMPATIBLE_MACHINE = "(cuda)"
 
 inherit cmake setuptools3 cuda
 
-S = "${WORKDIR}/git"
 B = "${S}"
 
 DEPENDS += " \
