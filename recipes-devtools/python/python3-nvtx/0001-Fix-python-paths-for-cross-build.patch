@@ -3,6 +3,7 @@ From: Kurt Kiefer <kurt.kiefer@arthrex.com>
 Date: Mon, 22 Aug 2022 17:25:58 -0700
 Subject: [PATCH] Fix python paths for cross build
 
+Upstream-Status: Inappropriate [OE-specific]
 ---
  python/setup.py | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
