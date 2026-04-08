@@ -3,11 +3,12 @@ HOMEPAGE = "https://github.com/rnag/dataclass-wizard"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=82e8e53f4dc2ba73d3c6804188bdb239"
 
-SRC_URI[sha256sum] = "f9fb5e21040c6ec681e3cfbce476b645679fa791ac58901bbb30d0f1f3dfb535"
+SRC_URI[sha256sum] = "1679948ed7c62103f40b34df97d03b35e6b2ad50f58173fdbe30074e2e4730f2"
 
-S = "${WORKDIR}/dataclass-wizard-${PV}"
+S = "${WORKDIR}/dataclass_wizard-${PV}"
+PYPI_PACKAGE = "dataclass_wizard"
 
-inherit setuptools3 pypi
+inherit pypi python_setuptools_build_meta
 
 PACKAGECONFIG ?= ""
 
