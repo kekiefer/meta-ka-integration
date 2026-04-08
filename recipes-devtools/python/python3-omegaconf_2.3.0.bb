@@ -3,6 +3,8 @@ HOMEPAGE = "https://github.com/omry/omegaconf"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7404c7fb5d66cfa18ddcd7b007a3e157"
 
+SRC_URI += "file://0001-Remove-unsupported-pkg_resources-references.patch"
+
 SRC_URI[sha256sum] = "d5d4b6d29955cc50ad50c46dc269bcd92c6e00f5f90d23ab5fee7bfca4ba4cc7"
 
 S = "${WORKDIR}/omegaconf-${PV}"
